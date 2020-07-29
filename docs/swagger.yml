@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: fibo_test
+  description: return fibonachi sequences
+servers:
+  - url: 'http://localhost:8000/'
+
+paths:
+  /fibonachi/:
+    get:
+      tags:
+        - main endpoint
+      summary: get Fibonacci slice by from_ inclusive and to exclusive
+      parameters:
+        - in: query
+          name: from_
+          schema:
+            type: integer
+          description: start of slice INCLUSIVE
+        - in: query
+          name: to
+          schema:
+            type: integer
+          description: end of slice EXCLUSIVE
+
+      responses:
+        '200':
+          description: list of fibonacci numbers in from_:to range
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+        '400':
+          description: bad parameters
+          content:
+            application/json:
+              schema:
+                type: object
